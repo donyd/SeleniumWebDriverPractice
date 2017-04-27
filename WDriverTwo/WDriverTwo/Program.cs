@@ -42,15 +42,20 @@ namespace WDriverTwo
 
 
             // Firefox default driver
-            IWebDriver driver = new FirefoxDriver();
+            IWebDriver driver = new ChromeDriver();
             driver.Url = "http://www.google.com";
 
            var searchField = driver.FindElement(By.Id("lst-ib"));
+
+            
+
             searchField.SendKeys("pluralsight");
 
+            // To retrieve a list of results, otherwise google ajax will go into auto-complete
+            // mode and render all other page elements null.
             driver.FindElement(By.Id("_fZl")).Click();
 
-            // waitForVisible | css=a.q.qs utilising wait logic from Selenium IDE code export
+          // waitForVisible | css=a.q.qs utilising wait logic from Selenium IDE code export
             //for (int second = 0; ; second++)
             //{
             //    if (second >= 60)
@@ -71,6 +76,7 @@ namespace WDriverTwo
             // var imagesLink = driver.FindElement(By.CssSelector("div[class='q qs']"));
                         
             driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
+            
             //driver.FindElement(By.CssSelector("a.q.qs")).Click();
             driver.FindElements(By.ClassName("qs"))[0].Click();
 
@@ -85,20 +91,20 @@ namespace WDriverTwo
             //driver.FindElement(By.Name("rbc9XlfmBObC6M:")).Click();
 
 
-            for (int second = 0; ; second++)
-            {
-                if (second >= 60) Assert.Fail("timeout");
-                try
-                {
-                    if (driver.FindElement(By.CssSelector("a.q.qs")).Displayed) break;
-                }
-                catch (Exception)
-                { }
-                Thread.Sleep(1000);
-            }
-            // second session to find the same image
-            // click | css=a.q.qs | 
-            driver.FindElement(By.CssSelector("a.q.qs")).Click();
+            //for (int second = 0; ; second++)
+            //{
+            //    if (second >= 60) Assert.Fail("timeout");
+            //    try
+            //    {
+            //        if (driver.FindElement(By.CssSelector("a.q.qs")).Displayed) break;
+            //    }
+            //    catch (Exception)
+            //    { }
+            //    Thread.Sleep(1000);
+            //}
+            //// second session to find the same image
+            //// click | css=a.q.qs | 
+            //driver.FindElement(By.CssSelector("a.q.qs")).Click();
 
             
             // click | name=rbc9XlfmBObC6M: | 
